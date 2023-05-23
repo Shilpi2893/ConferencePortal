@@ -1,0 +1,51 @@
+<mat-toolbar color="accent" class="sticky-top">
+    <button mat-icon-button class="example-icon">
+      <mat-icon routerLink="home">groups</mat-icon>
+    </button>
+
+    <span>Conference Portal</span>
+
+    <span class="example-spacer mx-5"></span>
+
+    <button mat-icon-button
+      *ngIf="!isLoggedIn" 
+      class="example-icon favorite-icon" 
+      routerLink="login" >
+      Login
+    </button>
+
+    <button mat-icon-button
+      *ngIf="!isLoggedIn"
+      class="example-icon mx-4" 
+      routerLink="signup">
+      Register
+    </button>
+
+    <button mat-icon-button
+      *ngIf="isLoggedIn"
+      class="example-icon favorite-icon mx-4"
+      routerLink="/participant">
+      Participants
+    </button>
+
+    <button mat-icon-button
+      *ngIf="isLoggedIn"
+      class="example-icon favorite-icon mx-4"
+      routerLink="/time-table">
+      Time Table
+    </button>
+
+    <button mat-icon-button
+      *ngIf="isLoggedIn"
+      class="example-icon favorite-icon mx-4"
+      (click)="onLogout()" >
+      Logout
+    </button>
+
+    <button mat-icon-button
+      *ngIf="isLoggedIn && user"
+      class="example-icon favorite-icon"
+      routerLink="/admin-dashboard/profile">
+      {{ user.userName }}
+    </button>
+</mat-toolbar>

@@ -1,0 +1,54 @@
+<!-- The Modal -->
+<div class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="btn-close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="card" style="width: 50%">
+            <div class="card-header">
+              <b>New Message</b>
+            </div>
+            <div class="card-body">
+              <form (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Recipient"
+                    name="recipient" [(ngModel)]="email.recipient">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Subject" 
+                    name="subject" [(ngModel)]="email.subject">
+                </div>
+                <div class="mb-3">
+                  <quill-editor
+                    placeholder="Enter text"
+                    name="msgBody"
+                    [(ngModel)]="email.msgBody"
+                    [modules]="quillConfig"
+                    (onBlur)="blur()"
+                    (onSelectionChanged)="onSelectionChanged()"
+                  >
+                  </quill-editor>
+                </div>
+                <button type="submit" class="btn btn-primary">Send</button>
+              </form>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-md-6 offset-md-3">
+            <mat-card>
+                <div class="container text-center">
+                    <img src="../../../assets/images/logo.jpg" alt="" />
+                </div>
+
+                <h1 class="text-center">Register Here !!</h1>
+
+                <form [formGroup]="mySignUpForm" (ngSubmit)="onSubmit()">
+                    <!--Username-->
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input matInput formControlName="userName" 
+                            placeholder="Enter user name">
+                        <mat-hint class="text-danger" 
+                            *ngIf="!mySignUpForm.get('userName')?.valid && mySignUpForm.get('userName')?.touched" >
+                            Enter user name
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <!--First Name-->
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput formControlName="firstName"
+                            placeholder="Enter first name">
+                        <mat-hint class="text-danger" 
+                            *ngIf="!mySignUpForm.get('firstName')?.valid && mySignUpForm.get('firstName')?.touched" >
+                            Enter first name
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <!--Last Name-->
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="lastName"
+                            placeholder="Enter last name">
+                        <mat-hint class="text-danger" 
+                            *ngIf="!mySignUpForm.get('lastName')?.valid && mySignUpForm.get('lastName')?.touched" >
+                            Enter last name
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <!--Email-->
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Email Address</mat-label>
+                        <input type="email" matInput formControlName="email"
+                            placeholder="Enter email address">
+                        <mat-hint class="text-danger" 
+                            *ngIf="!mySignUpForm.get('email')?.valid && mySignUpForm.get('email')?.touched" >
+                            Enter your valid email
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <!--Password-->
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput formControlName="password"
+                            placeholder="Enter Password">
+                        <mat-hint class="text-danger"
+                            *ngIf="!mySignUpForm.get('password')?.valid && mySignUpForm.get('password')?.touched" >
+                            Enter password
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <!--Phone Number-->
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput formControlName="phone"
+                            placeholder="Enter Phone Number">
+                        <mat-hint class="text-danger" 
+                            *ngIf="!mySignUpForm.get('phone')?.valid && mySignUpForm.get('phone')?.touched" >
+                            Enter your phone number
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <!--University Name-->
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>University Name</mat-label>
+                        <input matInput formControlName="universityName"
+                            placeholder="Enter University Name">
+                        <mat-hint class="text-danger" 
+                            *ngIf="!mySignUpForm.get('universityName')?.valid && mySignUpForm.get('universityName')?.touched" >
+                            Enter your university name
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="mb-2">
+                        <mat-label>Speaker</mat-label>
+                        <mat-select formControlName="speaker">
+                            <mat-option value="Invited Speaker">Invited Speaker</mat-option>
+                            <mat-option value="Non-Invited Speaker">Non-Invited Speaker</mat-option>
+                            <mat-option value="Student">Student</mat-option>
+                        </mat-select>
+                        <mat-hint class="text-danger" 
+                            *ngIf="!mySignUpForm.get('speaker')?.valid && mySignUpForm.get('speaker')?.touched" >
+                            Please select Speaker
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <div class="container text-center">
+                        <button mat-raised-button type="submit" color="primary" [disabled]="!mySignUpForm.valid">Register</button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

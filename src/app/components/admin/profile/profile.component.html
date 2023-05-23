@@ -1,0 +1,45 @@
+<mat-card *ngIf="user">
+    <h3 class="fw-bold">Your Profile Details</h3>
+    <mat-card-content>
+        <div class="container">
+            <div class="container text-center">
+                <img src="../../../../assets/images/default-profile.png" 
+                    class="profile-image" alt="" />
+                    
+                <h2 class="mt-3">{{ user.firstName }} {{ user.lastName }}</h2>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <!-- table -->
+                    <table class="profile-table text-center">
+                        <tr *ngIf="user.userName">
+                            <td>User Name</td>
+                            <td>{{ user.userName }}</td>
+                        </tr>
+                        <tr *ngIf="user.id">
+                            <td>User Id</td>
+                            <td>{{ user.id }}</td>
+                        </tr>
+                        <tr *ngIf="user.phone">
+                            <td>Phone Number</td>
+                            <td>{{ user.phone }}</td>
+                        </tr>
+                        <tr>
+                            <td>Role</td>
+                            <td>{{ user.authorities[0].authority }}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>{{ user.enabled ? "ACTIVE" : "NOT ACTIVE" }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+
+    <mat-card-actions class="text-center">
+        <button mat-raised-button color="primary" disabled>UPDATE</button>
+    </mat-card-actions>
+</mat-card>

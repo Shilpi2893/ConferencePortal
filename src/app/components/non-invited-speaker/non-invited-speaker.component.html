@@ -1,0 +1,126 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <mat-card>
+                <div class="container text-center">
+                    <img src="../../../assets/images/logo.jpg" alt="" />
+                </div>
+
+                <h1 class="text-center">NON-INVITED SPEAKER</h1>
+
+                <form #nonInvitedSpeakerForm="ngForm" (ngSubmit)="onSubmit()">
+                    <label class="mb-4 me-3 fs-6">Type of Participation :</label>
+                    <mat-radio-group name="isParticipation" [(ngModel)]="nonInvitedSpeaker.isParticipation">
+                        <mat-radio-button value="In-person" (click)="toggleInPerson()">In-person</mat-radio-button>
+                        <mat-radio-button value="Online" (click)="toggleOnline()">Online</mat-radio-button>
+                    </mat-radio-group>
+                    <br />
+                    <ng-container *ngIf="showInPerson">
+                        <!--Arrival Date-->
+                        <mat-form-field color="accent" appearance="fill" class="me-3">
+                            <mat-label>Arrival Date</mat-label>
+                            <input matInput [matDatepicker]="picker1"
+                                name = "arrivalDate"
+                                [(ngModel)]="nonInvitedSpeaker.arrivalDate"
+                                #arrivalDate = "ngModel"
+                                required />
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-hint class="text-danger" *ngIf="arrivalDate.touched && !arrivalDate.valid">
+                                Please choose Arrival Date
+                            </mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                        
+
+                        <!--Departure Date-->
+                        <mat-form-field color="accent" appearance="fill" class="mb-3">
+                            <mat-label>Departure Date</mat-label>
+                            <input matInput [matDatepicker]="picker2"
+                                name = "departureDate"
+                                [(ngModel)]="nonInvitedSpeaker.departureDate"
+                                #departureDate="ngModel"
+                                required />
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-hint class="text-danger" *ngIf="departureDate.touched && !departureDate.valid">
+                                Please choose Departure Date
+                            </mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="mb-2">
+                            <mat-label>Choose Accommodation</mat-label>
+                            <mat-select name="accommodation" [(ngModel)]="nonInvitedSpeaker.accommodation" #accommodation="ngModel">
+                                <mat-option>None</mat-option>
+                                <mat-option value="Hotel 1">Hotel 1</mat-option>
+                                <mat-option value="Hotel 2">Hotel 2</mat-option>
+                                <mat-option value="Hotel 3">Hotel 3</mat-option>
+                                <mat-option value="Hotel 4">Hotel 4</mat-option>
+                                <mat-option value="Hotel 5">Hotel 5</mat-option>
+                                <mat-hint class="text-danger" *ngIf="accommodation.touched && !accommodation.valid">
+                                    Please choose the accommodation
+                                </mat-hint>
+                            </mat-select>
+                        </mat-form-field>
+                        <br />
+
+                        <label class="mb-4 me-3 fs-6">Registration fee :</label> £100 <br />
+                        
+                    </ng-container> 
+                    
+                    <!--Online starts from here-->
+
+                    <label id="example-radio-group-label" class="mb-4 me-3 fs-6" *ngIf="showOnline">
+                        Would you like to give Abstract ?
+                    </label>
+                    <mat-radio-group name="isAbstract" [(ngModel)]="nonInvitedSpeaker.isAbstract" *ngIf="showOnline" #isAbstract="ngModel">
+                        <mat-radio-button value="Yes">Yes</mat-radio-button>
+                        <mat-radio-button value="No">No</mat-radio-button>
+                        <mat-hint class="text-danger" *ngIf="isAbstract.touched && !isAbstract.valid">
+                            Please select
+                        </mat-hint>
+                    </mat-radio-group>
+
+                    <div class="mb-4" *ngIf="showOnline">
+                        <label class="form-label fs-6">Abstract</label>
+                        <input class="form-control" type="file" (change)="onChangeFile($event)" />
+                        <mat-hint>Optional</mat-hint>
+                    </div>
+
+                    <label id="example-radio-group-label" class="mb-4 me-3 fs-6" *ngIf="showOnline">
+                        Would you like to give a Poster ?
+                    </label>
+                    <mat-radio-group name="isPoster" [(ngModel)]="nonInvitedSpeaker.isPoster" *ngIf="showOnline" #isPoster="ngModel" >
+                        <mat-radio-button value="Yes">Yes</mat-radio-button>
+                        <mat-radio-button value="No">No</mat-radio-button>
+                        <mat-hint class="text-danger" *ngIf="isPoster.touched && !isPoster.valid">
+                            Please select
+                        </mat-hint>
+                    </mat-radio-group> <br />
+
+                    <mat-form-field appearance="fill" class="mb-3" *ngIf="showOnline">
+                        <mat-label>For which session ?</mat-label>
+                        <mat-select name="session" [(ngModel)]="nonInvitedSpeaker.session" #session="ngModel" >
+                            <mat-option>None</mat-option>
+                            <mat-option value="Session (Human Computer Interaction)">Session (Human Computer Interaction)</mat-option>
+                            <mat-option value="Session (Artificial Intelligence)">Session (Artificial Intelligence)</mat-option>
+                            <mat-option value="Session (Machine Learning)">Session (Machine Learning)</mat-option>
+                            <mat-option value="Session (Big Data)">Session (Big Data)</mat-option>
+                            <mat-option value="Session (Data Minig)">Session (Data Minig)</mat-option>
+                        </mat-select>
+                        <mat-hint class="text-danger" *ngIf="session.touched && !session.valid">
+                            Please select the session
+                        </mat-hint>
+                    </mat-form-field> <br />
+
+                    <label class="me-3 fs-6" *ngIf="showOnline">Registration fee : £20</label>
+
+                    <div class="container text-center mt-5">
+                        <button mat-raised-button type="submit" color="primary" [disabled]="!nonInvitedSpeakerForm.valid">Submit</button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

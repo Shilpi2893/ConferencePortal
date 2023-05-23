@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <mat-card>
+                <div class="container text-center">
+                    <img src="../../../assets/images/logo.jpg" alt="" />
+                </div>
+
+                <h1 class="text-center">Login Here !!</h1>
+
+                <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+                    <!--Username-->
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input matInput name="userName" [(ngModel)]="loginData.userName"
+                            placeholder="Enter user name" #userName="ngModel" required>
+                        <mat-hint class="text-danger" 
+                            *ngIf="userName.invalid && (userName.dirty || userName.touched)" >
+                            User name is required
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <!--Password-->
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput name="password" [(ngModel)]="loginData.password"
+                            placeholder="Enter Password" #password="ngModel" required>
+                        <mat-hint class="text-danger" 
+                            *ngIf="password.invalid && (password.dirty || password.touched)" >
+                            Password is required
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <div class="container text-center">
+                        <button mat-raised-button type="submit" color="primary" [disabled]="!loginForm.valid">Login</button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

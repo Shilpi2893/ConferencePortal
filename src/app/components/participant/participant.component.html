@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <h1 class="fw-bold mt-2">Participant Details</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <!-- table -->
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">File Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let invitedSpeaker of invitedSpeakers; let i = index">
+                    <td>{{ invitedSpeaker.user.firstName }}</td>
+                    <td>{{ invitedSpeaker.user.lastName }}</td>
+                    <td>
+                      <button type="button" class="btn btn-link" (click)="downloadFileInvited(invitedSpeaker.fileName)">
+                        {{ invitedSpeaker.fileName }}
+                      </button>
+                    </td>
+                  </tr>
+                  <tr *ngFor="let nonInvitedSpeaker of nonInvitedSpeakers; let i = index">
+                    <td>{{ nonInvitedSpeaker.user.firstName }}</td>
+                    <td>{{ nonInvitedSpeaker.user.lastName }}</td>
+                    <td>
+                      <button type="button" class="btn btn-link" (click)="downloadFileNonInvited(nonInvitedSpeaker.fileNameAbstract)">
+                        {{ nonInvitedSpeaker.fileNameAbstract }}
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

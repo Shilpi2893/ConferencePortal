@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+        <h1 class="fw-bold">User Details</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <!-- table -->
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Speaker</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of users; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ user.userName }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>
+                      <button type="button" class="btn btn-link" #popupBtn id="popupBtn" (click)="openModal(content)">
+                        {{ user.email }}
+                      </button>
+                    </td>
+                    <td>{{ user.speaker }}</td>
+                    <td>{{ user.authorities[0].authority }}</td>
+                    <td>{{ user.enabled ? "ACTIVE" : "NOT ACTIVE" }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Compose Email</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Recipient" formControlName="recipient">
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Subject" formControlName="subject">
+      </div>
+      <div class="mb-3">
+        <textarea type="text" class="form-control" placeholder="Message Body" formControlName="msgBody"></textarea>
+        <!-- <quill-editor
+          placeholder="Enter text"
+          formControlName="msgBody"
+          [modules]="quillConfig"
+          (onBlur)="blur()"
+          (onSelectionChanged)="onSelectionChanged()"
+        >
+        </quill-editor> -->
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="modal.close('Send click')">Send</button>
+    </form>
+	</div>
+	<!-- <div class="modal-footer">
+		<button type="submit" class="btn btn-primary" (click)="modal.close('Send click')">Send</button>
+	</div> -->
+</ng-template>

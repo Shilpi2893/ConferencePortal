@@ -1,0 +1,130 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <mat-card>
+                <div class="container text-center">
+                    <img src="../../../assets/images/logo.jpg" alt="" />
+                </div>
+
+                <h1 class="text-center">STUDENT</h1>
+
+                <form [formGroup]="studentForm" (ngSubmit)="submit()" >
+                    <label class="mb-4 me-3 fs-6">Type of Participation :</label>
+                    <mat-radio-group name="isParticipation" formControlName="isParticipation">
+                        <mat-radio-button value="In-person" (click)="toggleInPerson()">In-person</mat-radio-button>
+                        <mat-radio-button value="Online" (click)="toggleOnline()">Online</mat-radio-button>
+                        <mat-hint class="text-danger" 
+                            *ngIf="!studentForm.get('isParticipation')?.valid && studentForm.get('isParticipation')?.touched" >
+                            Please select
+                        </mat-hint>
+                    </mat-radio-group>
+                    <br />
+                    <ng-container *ngIf="showInPerson">
+                        <!--Arrival Date-->
+                        <mat-form-field color="accent" appearance="fill" class="me-3">
+                            <mat-label>Arrival Date</mat-label>
+                            <input matInput [matDatepicker]="picker1" name="arrivalDate" formControlName="arrivalDate">
+                            <mat-hint>YYYY/MM/DD</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                            <mat-hint class="text-danger" 
+                                *ngIf="!studentForm.get('arrivalDate')?.valid && studentForm.get('arrivalDate')?.touched" >
+                                Please choose Arrival date
+                            </mat-hint>
+                        </mat-form-field>
+                        
+
+                        <!--Departure Date-->
+                        <mat-form-field color="accent" appearance="fill" class="mb-3">
+                            <mat-label>Departure Date</mat-label>
+                            <input matInput [matDatepicker]="picker2" name="departureDate" formControlName="departureDate">
+                            <mat-hint>YYYY/MM/DD</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                            <mat-hint class="text-danger" 
+                                *ngIf="!studentForm.get('departureDate')?.valid && studentForm.get('departureDate')?.touched" >
+                                Please choose Departure date
+                            </mat-hint>
+                        </mat-form-field>
+
+                        <label id="example-radio-group-label" class="mb-4 me-3 fs-6">Is financial support needed ?</label>
+                        <mat-radio-group name="isFinancialNeed" formControlName="isFinancialNeed" >
+                            <mat-radio-button value="Yes">Yes</mat-radio-button>
+                            <mat-radio-button value="No">No</mat-radio-button>
+                            <mat-hint class="text-danger" 
+                                *ngIf="!studentForm.get('isFinancialNeed')?.valid && studentForm.get('isFinancialNeed')?.touched" >
+                                Please select
+                            </mat-hint>
+                        </mat-radio-group> <br />
+
+                        <label id="example-radio-group-label" class="mb-4 me-3 fs-6">Need help in getting accomodation ?</label>
+                        <mat-radio-group name="isAccomodation" formControlName="isAccomodation" >
+                            <mat-radio-button value="Yes">Yes</mat-radio-button>
+                            <mat-radio-button value="No">No</mat-radio-button>
+                            <mat-hint class="text-danger" 
+                                *ngIf="!studentForm.get('isAccomodation')?.valid && studentForm.get('isAccomodation')?.touched" >
+                                Please select
+                            </mat-hint>
+                        </mat-radio-group> <br />
+
+                        <mat-form-field appearance="fill" class="mb-2" *ngIf="ishidden">
+                            <mat-label>Choose Accomodation</mat-label>
+                            <mat-select name="accomodation" formControlName="accomodation" >
+                                <mat-option>None</mat-option>
+                                <mat-option value="Hotel 1">Hotel 1</mat-option>
+                                <mat-option value="Hotel 2">Hotel 2</mat-option>
+                                <mat-option value="Hotel 3">Hotel 3</mat-option>
+                                <mat-option value="Hotel 4">Hotel 4</mat-option>
+                                <mat-option value="Hotel 5">Hotel 5</mat-option>
+                            </mat-select>
+                            <mat-hint class="text-danger" 
+                                *ngIf="!studentForm.get('accomodation')?.valid && studentForm.get('accomodation')?.touched" >
+                                Please choose the Accomodation
+                            </mat-hint>
+                        </mat-form-field>
+                        <br />
+
+                        <label class="mb-4 me-3 fs-6">Registration fee :</label> £50 <br />
+                        
+                    </ng-container>
+
+                    <label id="example-radio-group-label" class="mb-4 me-3 fs-6" *ngIf="showOnline">
+                        Would you like to give a Poster ?
+                    </label>
+                    <mat-radio-group name="poster" formControlName="poster" *ngIf="showOnline" >
+                        <mat-radio-button value="Yes">Yes</mat-radio-button>
+                        <mat-radio-button value="No">No</mat-radio-button>
+                        <mat-hint class="text-danger" 
+                            *ngIf="!studentForm.get('poster')?.valid && studentForm.get('poster')?.touched" >
+                            Please select
+                        </mat-hint>
+                    </mat-radio-group> <br />
+
+                    <div  *ngIf="showOnline">
+                        <mat-form-field appearance="fill" class="mb-2" *ngIf="show">
+                            <mat-label>For which session ?</mat-label>
+                            <mat-select name="session" formControlName="session" >
+                                <mat-option>None</mat-option>
+                                <mat-option value="Session (Human Computer Interaction)">Session (Human Computer Interaction)</mat-option>
+                                <mat-option value="Session (Artificial Intelligence)">Session (Artificial Intelligence)</mat-option>
+                                <mat-option value="Session (Machine Learning)">Session (Machine Learning)</mat-option>
+                                <mat-option value="Session (Big Data)">Session (Big Data)</mat-option>
+                                <mat-option value="Session (Data Minig)">Session (Data Minig)</mat-option>
+                            </mat-select>
+                            <mat-hint class="text-danger" 
+                                *ngIf="!studentForm.get('session')?.valid && studentForm.get('session')?.touched" >
+                                Please select the session
+                            </mat-hint>
+                        </mat-form-field> <br />
+                    </div>
+
+                    <label class="me-3 fs-6" *ngIf="showOnline">Registration fee : £10</label> <br />
+
+                    <div class="container text-center mt-5">
+                        <button mat-raised-button type="submit" color="primary">Submit</button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>
